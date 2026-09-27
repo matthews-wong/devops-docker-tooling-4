@@ -1,5 +1,7 @@
 # status-page
 
+[![validate](https://github.com/matthews-wong/devops-docker-tooling-4/actions/workflows/validate.yml/badge.svg)](https://github.com/matthews-wong/devops-docker-tooling-4/actions/workflows/validate.yml)
+
 A small static status page, built and served as a hardened container image.
 There's no framework here on purpose: a zero-dependency Node script stamps
 build metadata (version, commit, build date) into a static HTML template,
@@ -32,3 +34,15 @@ docker compose up --build
 
 Compose adds a healthcheck, resource limits, and a read-only root
 filesystem — see `docker-compose.yml` for the full hardening list.
+
+## Validate
+
+```sh
+make validate   # hadolint + docker compose config + build the site
+make smoke      # build the image and hit it with a real HTTP request
+```
+
+The container runs as the `nginx` image's unprivileged UID 101 on port
+8080 (via `nginxinc/nginx-unprivileged`), so `read_only: true` in Compose
+doesn't need a custom user — only `/tmp`, `/var/cache/nginx`, and
+`/var/run` need the `tmpfs` mounts already in `docker-compose.yml`.
