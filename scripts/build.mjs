@@ -10,8 +10,8 @@ const pkg = JSON.parse(await readFile(path.join(rootDir, 'package.json'), 'utf8'
 
 const buildInfo = {
   version: pkg.version,
-  commit: process.env.BUILD_COMMIT ?? 'unknown',
-  date: process.env.BUILD_DATE ?? new Date().toISOString(),
+  commit: process.env.BUILD_COMMIT || 'unknown',
+  date: process.env.BUILD_DATE || new Date().toISOString(),
 };
 
 function render(template, vars) {
