@@ -36,6 +36,9 @@ jobs:
       - name: Lint Dockerfile
         run: hadolint Dockerfile
 
+      - name: Lint shell scripts
+        run: shellcheck scripts/*.sh
+
       - name: Validate compose config
         run: docker compose config --quiet
 
@@ -44,3 +47,6 @@ jobs:
 
       - name: Build the image
         run: docker build -t status-page:ci .
+
+      - name: Smoke test the container
+        run: ./scripts/smoke-test.sh status-page:ci
