@@ -1,0 +1,13 @@
+{
+  "name": "status-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static status page, built with a zero-dependency script and served by nginx",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
